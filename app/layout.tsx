@@ -1,6 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Merriweather, EB_Garamond } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+import GlobalProviders from "@/components/client/GlobalProviders";
+import RootHeader from "@/components/server/RootHeader";
+import RootFooter from "@/components/server/RootFooter";
+
+const ebGaramondHeading = EB_Garamond({
+  subsets: ["latin"],
+  variable: "--font-heading",
+});
+
+const merriweather = Merriweather({
+  subsets: ["latin"],
+  variable: "--font-serif",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,9 +35,27 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={cn(
+        "h-full",
+        "antialiased",
+        geistSans.variable,
+        geistMono.variable,
+        "font-serif",
+        merriweather.variable,
+        ebGaramondHeading.variable,
+      )}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body>
+        <GlobalProviders>
+          <div className="flex flex-col h-screen">
+            <RootHeader />
+            <main className="max-w-container typeset w-full h-full no-scrollbar">
+              {children}
+            </main>
+            <RootFooter />
+          </div>
+        </GlobalProviders>
+      </body>
     </html>
   );
 }
