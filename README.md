@@ -1,5 +1,31 @@
 # My NextJS Template
 
+## Initial Steps
+
+- Install dependencies using `npm install`
+- **OPTIONAL** : Customize your theme using [Shadcn Create](https://ui.shadcn.com/create)
+- **OPTIONAL** : Make corresponding changes to the fonts in `./app/typeset.css` according to the [Typeset Docs](https://ui.shadcn.com/docs/typeset)
+- use the `./scripts/create-feature.sh` script to help create directory structure for a new feature. More on this below
+
+## Stack Used
+
+- Hosting : Vercel
+- Framework : NextJS + TS + MDX
+- UI Library : ShadCn + Tabler Icons + Dark Mode + Typeset
+- Database ORM : Drizzle
+- Validations : Zod
+- Database : Postgres (NeonDB)
+- Forms : React Hook Forms
+
+### Yet To Implement
+
+- Authentication : Better Auth
+- Payment : Polar
+- Email : Resend
+- Error Monitorings : Sentry
+- Analytics : Inbuild Vercel.
+- AI SDK : AI SDK from Vercel
+
 ## File and Directory Structure
 
 - `./app/` : NextJS App router. Use this for routing only. Individual components go in the `./components/` folder depending on what they are doing
