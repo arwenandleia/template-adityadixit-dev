@@ -8,13 +8,22 @@ export default async function RootHomePage() {
       <p> Simple template</p>
       <Separator className="my-4" />
 
-      <ul>
-        <li>
-          <Link href="/docs/scaffold-nextjs-project">
-            Scaffold NextJS Project
-          </Link>
-        </li>
-      </ul>
+      <Link href="/dashboard">Protected Route DashBoard</Link>
+
+      <Separator className="my-4" />
+
+      <section>
+        <h2>Docs</h2>
+        <ul>
+          <li>
+            <Link href="/docs/scaffold-nextjs-project">
+              Scaffold NextJS Project
+            </Link>
+          </li>
+        </ul>
+      </section>
+
+      <Separator className="my-4" />
     </article>
   );
 }

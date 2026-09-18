@@ -92,11 +92,18 @@ npx auth@latest generate
 ```ts
 import { drizzle } from "drizzle-orm/node-postgres";
 import cfg from "@/lib/config";
-import { authRelations } from "@/auth-schema";
+import { authRelations } from "./schemas/auth-schema";
 
 export const db = drizzle(cfg.db.url, {
   relations: { ...authRelations },
 });
+```
+
+- Generate and Migrate the new schema. You could use the `npm run db:dev` script provided
+
+```bash
+npx drizzle-kit generate # generate the migration file
+npx drizzle-kit migrate # apply the migration
 ```
 
 ## Add [Authentication Methods](https://better-auth.com/docs/installation#authentication-methods)
