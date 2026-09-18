@@ -3,7 +3,7 @@ import "server-only";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "../ui/button";
-import { IconBrandX } from "@tabler/icons-react";
+import { IconBrandX, IconBrandGithub } from "@tabler/icons-react";
 
 const RootFooter = () => {
   return (
@@ -12,13 +12,6 @@ const RootFooter = () => {
         <p>© 2026 Aditya Dixit</p>
         <p>site under construction...</p>
         <ul className="flex items-center gap-x-4">
-          <li className="hidden md:block">
-            <Button variant="outline" size="icon-xs">
-              <Link href="https://x.com/arwenandleia" target="_blank">
-                <IconBrandX />
-              </Link>
-            </Button>
-          </li>
           <li className="hidden md:block">
             <Button variant="outline" size="xs">
               <Link href="https://www.boot.dev/u/adityadixit" target="_blank">
@@ -33,6 +26,24 @@ const RootFooter = () => {
                     width: "48px",
                   }}
                 />
+              </Link>
+            </Button>
+          </li>
+
+          <li className="hidden md:block">
+            <Button variant="outline" size="icon-xs">
+              <Link href="https://x.com/arwenandleia" target="_blank">
+                <IconBrandX />
+              </Link>
+            </Button>
+          </li>
+          <li>
+            <Button variant="outline" size="icon">
+              <Link
+                href="https://github.com/adityadixit-dev/adityadixit-dev"
+                target="_blank"
+              >
+                <IconBrandGithub />
               </Link>
             </Button>
           </li>

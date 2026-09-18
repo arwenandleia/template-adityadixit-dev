@@ -8,11 +8,17 @@ export default function page() {
       <h2>Login Page</h2>
       <section className="flex items-center justify-center h-full w-full md:p-32 p-8">
         <Tabs defaultValue="login" className="w-full min-h-160">
-          <TabsList className="w-full my-4">
-            <TabsTrigger value="login" className="dark:data-active:bg-primary">
+          <TabsList className="w-full my-4 ">
+            <TabsTrigger
+              value="login"
+              className="dark:data-active:bg-muted-foreground dark:data-active:text-muted"
+            >
               Login
             </TabsTrigger>
-            <TabsTrigger value="signup" className="dark:data-active:bg-primary">
+            <TabsTrigger
+              value="signup"
+              className="dark:data-active:bg-muted-foreground dark:data-active:text-muted"
+            >
               SignUp
             </TabsTrigger>
           </TabsList>

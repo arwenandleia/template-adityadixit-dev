@@ -1,9 +1,8 @@
 import "server-only";
 
 import Link from "next/link";
-import { IconBrandGithub } from "@tabler/icons-react";
-import { Button } from "../ui/button";
 import LightDarkButton from "../client/LightDarkButton";
+import LoginLogoutButton from "../client/login/LoginLogoutButton";
 
 const RootHeader = () => {
   return (
@@ -14,14 +13,7 @@ const RootHeader = () => {
         </h2>
         <ul className="flex items-center gap-x-4">
           <li>
-            <Button variant="outline" size="icon">
-              <Link
-                href="https://github.com/adityadixit-dev/adityadixit-dev"
-                target="_blank"
-              >
-                <IconBrandGithub />
-              </Link>
-            </Button>
+            <LoginLogoutButton />
           </li>
           <li>
             <LightDarkButton />
