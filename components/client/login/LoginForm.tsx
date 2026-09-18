@@ -17,46 +17,31 @@ import { Field, FieldGroup } from "@/components/ui/field";
 import { Button } from "@/components/ui/button";
 import ControlledFieldInput from "@/components/ui/custom/ControlledFieldInput";
 
-const signupFormSchema = z
-  .object({
-    fullName: z
-      .string()
-      .min(4, "Name must be atleast 4 letters")
-      .max(32, "Name can be a maximum of 32 characters"),
-    email: z.email(),
-    password: z
-      .string()
-      .min(8, "Password should be atleast 8 characters")
-      .max(32, "Password can be a maximum of 32 characters"),
-    confirmPassword: z
-      .string()
-      .min(8, "Password should be atleast 8 characters")
-      .max(32, "Password can be a maximum of 32 characters"),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    error: "Passwords do not match",
-    path: ["confirmPassword"],
-  });
+const loginFormSchema = z.object({
+  email: z.email(),
+  password: z
+    .string()
+    .min(8, "Password should be atleast 8 characters")
+    .max(32, "Password can be a maximum of 32 characters"),
+});
 
-export type SignupFormType = z.infer<typeof signupFormSchema>;
+export type LoginFormType = z.infer<typeof loginFormSchema>;
 
-const SignupForm = () => {
+const LoginForm = () => {
   const {
     handleSubmit,
     control,
     reset,
     formState: { isSubmitting, isSubmitted },
-  } = useForm<SignupFormType>({
-    resolver: zodResolver(signupFormSchema),
+  } = useForm<LoginFormType>({
+    resolver: zodResolver(loginFormSchema),
     defaultValues: {
-      fullName: "",
       email: "",
       password: "",
-      confirmPassword: "",
     },
   });
 
-  const onSubmit = async (data: SignupFormType) => {
+  const onSubmit = async (data: LoginFormType) => {
     toast("You submitted the following values:", {
       description: (
         <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
@@ -69,30 +54,14 @@ const SignupForm = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Create an Account</CardTitle>
+        <CardTitle>Login to your Account</CardTitle>
         <CardDescription>
-          Enter your information below to create an account
+          Enter your email and password to login
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form id="root-signup-form" onSubmit={handleSubmit(onSubmit)}>
+        <form id="root-login-form" onSubmit={handleSubmit(onSubmit)}>
           <FieldGroup>
-            {/* --- FULL NAME --- */}
-            <Controller
-              control={control}
-              name="fullName"
-              render={({ field, fieldState }) => (
-                <ControlledFieldInput
-                  field={field}
-                  fieldState={fieldState}
-                  customId="root-signup-form-full-name"
-                  customLabel="Full Name"
-                  type="text"
-                />
-              )}
-            />
-            {/* --- FULL NAME --- */}
-
             {/* --- EMAIL --- */}
             <Controller
               control={control}
@@ -101,7 +70,7 @@ const SignupForm = () => {
                 <ControlledFieldInput
                   field={field}
                   fieldState={fieldState}
-                  customId="root-signup-form-email"
+                  customId="root-login-form-email"
                   customLabel="Email"
                   type="email"
                 />
@@ -117,29 +86,13 @@ const SignupForm = () => {
                 <ControlledFieldInput
                   field={field}
                   fieldState={fieldState}
-                  customId="root-signup-form-password"
+                  customId="root-login-form-password"
                   customLabel="Password"
                   type="password"
                 />
               )}
             />
             {/* --- PASSWORD --- */}
-
-            {/* --- CONFIRM PASSWORD --- */}
-            <Controller
-              control={control}
-              name="confirmPassword"
-              render={({ field, fieldState }) => (
-                <ControlledFieldInput
-                  field={field}
-                  fieldState={fieldState}
-                  customId="root-signup-form-confirm-password"
-                  customLabel="Confirm Password"
-                  type="password"
-                />
-              )}
-            />
-            {/* --- CONFIRM PASSWORD --- */}
           </FieldGroup>
         </form>
       </CardContent>
@@ -155,12 +108,11 @@ const SignupForm = () => {
           </Button>
           <Button
             type="submit"
-            form="root-signup-form"
+            form="root-login-form"
             disabled={isSubmitting || isSubmitted}
-
             className="flex-1"
           >
-            Submit
+            Login
           </Button>
         </Field>
       </CardFooter>
@@ -168,4 +120,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default LoginForm;
