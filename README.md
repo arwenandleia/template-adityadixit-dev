@@ -7,6 +7,7 @@
 - **OPTIONAL** : Customize your theme using [Shadcn Create](https://ui.shadcn.com/create)
 - **OPTIONAL** : Make corresponding changes to the fonts in `./app/typeset.css` according to the [Typeset Docs](https://ui.shadcn.com/docs/typeset)
 - use the `./scripts/create-feature.sh` script to help create directory structure for a new feature. More on this below
+- Remember to generate and migrate your database if not already done
 
 ## Suggested Git Workflow
 

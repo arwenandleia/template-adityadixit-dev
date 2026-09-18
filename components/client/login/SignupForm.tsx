@@ -16,6 +16,8 @@ import {
 import { Field, FieldGroup } from "@/components/ui/field";
 import { Button } from "@/components/ui/button";
 import ControlledFieldInput from "@/components/ui/custom/ControlledFieldInput";
+import { signUpUser } from "@/lib/actions/login.actions";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const signupFormSchema = z
   .object({
@@ -41,6 +43,9 @@ const signupFormSchema = z
 export type SignupFormType = z.infer<typeof signupFormSchema>;
 
 const SignupForm = () => {
+  const callbackURL = useSearchParams().get("callbackURL") || "/dashboard";
+  const router = useRouter();
+
   const {
     handleSubmit,
     control,
@@ -56,14 +61,29 @@ const SignupForm = () => {
     },
   });
 
-  const onSubmit = async (data: SignupFormType) => {
-    toast("You submitted the following values:", {
-      description: (
-        <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
-          <code>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+  const onSubmit = async ({
+    fullName,
+    email,
+    password,
+    confirmPassword,
+  }: SignupFormType) => {
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      reset();
+    }
+    const { success, message } = await signUpUser({
+      fullName,
+      email,
+      password,
     });
+    if (success) {
+      toast.success(message);
+      router.refresh();
+      router.push(callbackURL);
+    } else {
+      reset();
+      toast.error(message);
+    }
   };
 
   return (

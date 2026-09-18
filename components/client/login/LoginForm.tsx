@@ -16,6 +16,8 @@ import {
 import { Field, FieldGroup } from "@/components/ui/field";
 import { Button } from "@/components/ui/button";
 import ControlledFieldInput from "@/components/ui/custom/ControlledFieldInput";
+import { loginUser } from "@/lib/actions/login.actions";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const loginFormSchema = z.object({
   email: z.email(),
@@ -28,6 +30,9 @@ const loginFormSchema = z.object({
 export type LoginFormType = z.infer<typeof loginFormSchema>;
 
 const LoginForm = () => {
+  const callbackURL = useSearchParams().get("callbackURL") || "/dashboard";
+  const router = useRouter();
+
   const {
     handleSubmit,
     control,
@@ -41,14 +46,19 @@ const LoginForm = () => {
     },
   });
 
-  const onSubmit = async (data: LoginFormType) => {
-    toast("You submitted the following values:", {
-      description: (
-        <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
-          <code>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+  const onSubmit = async ({ email, password }: LoginFormType) => {
+    const { success, message } = await loginUser({
+      email,
+      password,
     });
+    if (success) {
+      toast.success(message);
+      router.refresh();
+      router.push(callbackURL);
+    } else {
+      toast.error(message);
+      reset();
+    }
   };
 
   return (
