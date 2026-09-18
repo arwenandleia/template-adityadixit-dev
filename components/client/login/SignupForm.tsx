@@ -17,7 +17,7 @@ import { Field, FieldGroup } from "@/components/ui/field";
 import { Button } from "@/components/ui/button";
 import ControlledFieldInput from "@/components/ui/custom/ControlledFieldInput";
 import { signUpUser } from "@/lib/actions/login.actions";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const signupFormSchema = z
   .object({
@@ -43,7 +43,7 @@ const signupFormSchema = z
 export type SignupFormType = z.infer<typeof signupFormSchema>;
 
 const SignupForm = () => {
-  const callbackURL = useSearchParams().get("callbackURL") || "/dashboard";
+  const callbackURL = "/";
   const router = useRouter();
 
   const {
@@ -78,6 +78,7 @@ const SignupForm = () => {
     });
     if (success) {
       toast.success(message);
+      reset();
       router.refresh();
       router.push(callbackURL);
     } else {
@@ -176,7 +177,7 @@ const SignupForm = () => {
           <Button
             type="submit"
             form="root-signup-form"
-            disabled={isSubmitting || isSubmitted}
+            disabled={isSubmitted}
 
             className="flex-1"
           >

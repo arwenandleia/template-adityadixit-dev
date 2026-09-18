@@ -22,7 +22,7 @@ export async function signUpUser({
     if (response.user.email === email) {
       return {
         success: true,
-        message: `User ${name} with email ${email} succesfully created`,
+        message: `User ${fullName} with email ${email} succesfully created`,
       };
     }
   } catch (error) {

@@ -67,11 +67,12 @@ git commit --amend --no-edit
 - Validations : Zod
 - Database : Postgres (NeonDB)
 - Forms : React Hook Forms
+- Authentication : Better Auth
+- Email : Resend
 
 ### Yet To Implement
 
-- Authentication : Better Auth
-- Email : Resend
+- Authentication: Reset Password
 - Error Monitorings : Sentry
 - AI SDK : AI SDK from Vercel
 - Payment : Polar

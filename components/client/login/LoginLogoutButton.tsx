@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 const LoginLogoutButton = () => {
   const router = useRouter();
-  const { data: session, isPending } = authClient.useSession();
+  const { data: session, isPending, error } = authClient.useSession();
 
   const handleSignout = async () => {
     await authClient.signOut({

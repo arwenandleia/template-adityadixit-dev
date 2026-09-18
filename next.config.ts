@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [new URL("https://www.boot.dev/**")],
   },
+  allowedDevOrigins: ["192.168.1.5"],
 };
 
 const withMDX = createMDX({
